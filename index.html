@@ -71,7 +71,7 @@
         <p>
           As team lead for a sensor network deployed with Kent State's Department of Agriculture, I designed the pipeline from
           Raspberry Pi Pico nodes to a Linux collection server and ran the team on sprints with code review and CI. On my own
-          time I'm building <span class="em">CarPi</span>, a Raspberry Pi that listens to a car's CAN bus.
+          time I'm building <span class="em">CarPi</span>, a Raspberry Pi that logs engine data from my car's CAN bus.
         </p>
         <p>
           I also know operations first-hand: four years at a warehouse that tracks roughly 150,000 boxes, and a summer deploying
@@ -132,11 +132,15 @@
               <h3 class="card-title">CarPi: CAN Bus Telemetry</h3>
               <p class="card-sub">Personal project · <span class="badge">In progress</span></p>
               <p>
-                A headless Raspberry Pi that plugs into a car's OBD-II port and captures live CAN traffic through an MCP2515
-                controller and Linux SocketCAN. It runs as its own Wi-Fi access point, so capture needs no internet. Decoded
-                frames are checked against known vehicle readings before a logged run is trusted, and a pandas layer turns raw
-                captures into engine data I can compare across runs.
+                A headless Raspberry Pi on my car's OBD-II port that requests live engine data from the ECU over CAN
+                (MCP2515 + Linux SocketCAN) about 8 times a second and logs one CSV per drive. Every decoded signal is checked
+                against a physical reference before a run is trusted, and a pandas pipeline, tested and deployed by GitHub
+                Actions, turns the logs into before/after comparisons for an engine repair.
               </p>
+              <a class="arrow-link arrow-link--card" href="/carpi/">
+                View drive data
+                <svg viewBox="0 0 20 20" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M3 10a.75.75 0 0 1 .75-.75h10.64l-3.72-3.72a.75.75 0 1 1 1.06-1.06l5 5a.75.75 0 0 1 0 1.06l-5 5a.75.75 0 1 1-1.06-1.06l3.72-3.72H3.75A.75.75 0 0 1 3 10Z"/></svg>
+              </a>
               <ul class="tags" aria-label="Technologies used">
                 <li>Python</li><li>SocketCAN</li><li>Raspberry Pi</li><li>MCP2515</li><li>pandas</li><li>Linux</li>
               </ul>
