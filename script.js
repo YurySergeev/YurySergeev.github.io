@@ -39,3 +39,15 @@ const lastId = [...navLinks.keys()].at(-1);
 window.addEventListener('scroll', () => {
   if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) setActive(lastId);
 }, { passive: true });
+
+// Wake the free-tier analyzer (Render sleeps it after 15 idle min) so it's warm by the time someone clicks
+const warmLinks = document.querySelectorAll('a[data-warm]');
+if (warmLinks.length) {
+  const warmed = new Set();
+  const warm = (url) => {
+    if (warmed.has(url)) return;
+    warmed.add(url);
+    fetch(url, { mode: 'no-cors', cache: 'no-store' }).catch(() => {});
+  };
+  window.addEventListener('load', () => warmLinks.forEach((a) => warm(a.href)), { once: true });
+}

@@ -490,6 +490,40 @@ a { color: inherit; text-decoration: none; }
 .arrow-link:hover svg,
 .arrow-link:focus-visible svg { transform: translateX(4px); }
 
+/* CarPi card: primary data link + secondary link out to the hosted analyzer */
+.card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 1rem;
+}
+.card-actions .arrow-link { margin-top: 0; }
+.arrow-link--ghost {
+  padding: calc(0.45rem - 1px) calc(1rem - 1px);   /* same outer size as the solid pill */
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--head);
+  font-size: 0.875rem;
+  transition: border-color 0.15s ease, color 0.15s ease, background-color 0.15s ease;
+}
+.arrow-link.arrow-link--ghost:hover,
+.arrow-link.arrow-link--ghost:focus-visible {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: var(--accent-chip);
+  text-decoration: none;
+}
+.arrow-link--ghost:hover svg,
+.arrow-link--ghost:focus-visible svg { transform: translate(2px, -2px); }   /* diagonal: leaves the site */
+.card-note {
+  margin: 0.55rem 0 0;
+  color: var(--text);
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  opacity: 0.8;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition: none !important; }
@@ -512,7 +546,7 @@ a { color: inherit; text-decoration: none; }
 
   body { font-size: 10pt; line-height: 1.45; }
 
-  .spotlight, .skip-link, .nav, .socials, .card-thumb, .arrow-link, .status-dot { display: none !important; }
+  .spotlight, .skip-link, .nav, .socials, .card-thumb, .arrow-link, .card-actions, .card-note, .status-dot { display: none !important; }
   .print-only { display: block; margin: 0.4rem 0 0; font-size: 9pt; }
 
   .layout, .sidebar, .content { display: block; width: auto; max-height: none; padding: 0; }
@@ -545,4 +579,14 @@ a { color: inherit; text-decoration: none; }
   .tags { margin-top: 0.3rem; gap: 0.3rem; }
   .tags li { padding: 0 0.4rem; border: 1px solid var(--line); font-size: 8pt; }
   .badge { border-color: var(--line); }
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
